@@ -2,6 +2,16 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.7.
 
+## Installing and setting up
+
+Run `npm install` to install the necessary files for the app to work. This app uses a MongoDB database via cloud, so you will need to set up an account and a whitelisted IP address on https://www.mongodb.com/. Replace the three following words inside the grave accents with your corresponding ones. The line of code is located in backend/app.js.
+
+mongoose
+  .connect(
+    'mongodb+srv://`username`:`password`@cluster0-fpifk.mongodb.net/`database`?retryWrites=true',
+    { useNewUrlParser: true }
+  )
+
 ## Development server
 
 Run `npm run server` to start Node.JS with Nodemon.
