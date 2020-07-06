@@ -36,10 +36,10 @@ export class ProductsListComponent implements OnInit {
     this.productsApparel = this.productsService.getProductsApparel();
     this.productsInCartArray = this.productsService.getProductsInCartArray();
     if (localStorage.hasOwnProperty('cart')) {
-      this.productsInCartArray = JSON.parse(localStorage.getItem('cart'));
+/*       this.productsInCartArray = JSON.parse(localStorage.getItem('cart'));
       for (const element of JSON.parse(localStorage.getItem('cart'))) {
         this.productsInCart += element.quantity;
-      }
+      } */
     }
     this.productsService.getProductsListener().subscribe(
       products => {

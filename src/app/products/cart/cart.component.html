@@ -1,7 +1,6 @@
 <ul class="outerShell" *ngIf="productsInCartArray.length > 0">
   <div class="checkout" *ngIf="cartTotal !== 0">
     <p>Tuotteiden kokonaissumma: {{cartTotal | currency: ' '}}€</p>
-    <!-- <p>Alennus: -{{cartTotal % 20 | currency: ' '}}€</p> -->
     <p>Toimitus: {{4.99 | currency: ' '}}€</p>
     <p>Tilauksen kokonaissumma: {{cartTotal + 4.99 | currency: ' '}}€</p>
     <button (click)="onPlaceAnOrder()" mat-raised-button color="accent">JATKA KASSALLE</button>

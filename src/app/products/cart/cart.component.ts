@@ -22,10 +22,10 @@ export class CartComponent implements OnInit {
     this.cartTotal = this.productsService.getProductsInCartTotal();
     this.productsInCartArray = this.productsService.getProductsInCartArray();
     if (localStorage.hasOwnProperty('cart')) {
-      this.productsInCartArray = JSON.parse(localStorage.getItem('cart'));
+/*       this.productsInCartArray = JSON.parse(localStorage.getItem('cart'));
       for (const element of JSON.parse(localStorage.getItem('cart'))) {
         this.cartTotal += element.price * element.quantity;
-      }
+      } */
     }
     this.productsService.getProductsInCartArrayListener().subscribe(
       items => {

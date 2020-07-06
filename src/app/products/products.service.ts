@@ -10,10 +10,10 @@ import { map } from 'rxjs/operators';
 })
 export class ProductsService {
 
-  private productsInCart = 0;
-  private productsInCartTotalPrice = 0;
+  productsInCart = 0;
+  productsInCartTotalPrice = 0;
   private orders = [];
-  private productsInCartArray = [];
+  productsInCartArray = [];
   private searchedProducts = [];
   private products: Product[];
   private productsTops: Product[];
@@ -22,12 +22,12 @@ export class ProductsService {
   private productsListener = new Subject<Product[]>();
   private searchedProductsListener = new Subject<any[]>();
   private ordersListener = new Subject<any>();
-  private productsInCartArrayListener = new Subject<Product[]>();
+  productsInCartArrayListener = new Subject<Product[]>();
   private productsTopsListener = new Subject<Product[]>();
   private productsBottomsListener = new Subject<Product[]>();
   private productsApparelListener = new Subject<Product[]>();
-  private productsInCartListener = new Subject<number>();
-  private productsInCartTotalPriceListener = new Subject<number>();
+  productsInCartListener = new Subject<number>();
+  productsInCartTotalPriceListener = new Subject<number>();
 
   constructor(
     private http: HttpClient,

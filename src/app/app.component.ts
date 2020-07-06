@@ -9,6 +9,9 @@ import { ProductsService } from './products/products.service';
 })
 export class AppComponent implements OnInit {
 
+  localStorageCartProducts = 0;
+  localStorageCartTotalPrice = 0;
+
   constructor(
     private authService: AuthService,
     private productsService: ProductsService
@@ -20,6 +23,21 @@ export class AppComponent implements OnInit {
     }
     this.authService.getCurrentUserListener().subscribe();
     this.productsService.getProductsDB();
+    if (localStorage.hasOwnProperty('cart')) {
+      this.productsService.productsInCartArray = JSON.parse(localStorage.getItem('cart'));
+      this.productsService.productsInCartArrayListener
+      .next(JSON.parse(localStorage.getItem('cart')));
+      for (const element of JSON.parse(localStorage.getItem('cart'))) {
+        this.localStorageCartProducts += element.quantity;
+        this.localStorageCartTotalPrice += element.price * element.quantity;
+      }
+      this.productsService.productsInCart = this.localStorageCartProducts;
+      this.productsService.productsInCartTotalPrice = this.localStorageCartTotalPrice;
+      this.productsService.productsInCartListener
+      .next(this.localStorageCartProducts);
+      this.productsService.productsInCartTotalPriceListener
+      .next(this.localStorageCartTotalPrice);
+    }
     if (localStorage.hasOwnProperty('cart')) {
       console.log(localStorage.getItem('cart'));
     }

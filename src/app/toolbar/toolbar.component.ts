@@ -32,18 +32,11 @@ export class ToolbarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log('ngOnInit toolbar');
     this.isLoading = true;
     this.isAuth = this.authService.getIsAuth();
     this.currentUser = this.authService.getUserEmail();
     this.productsInCart = this.productsService.getProductsInCart();
     this.productsInCartArray = this.productsService.getProductsInCartArray();
-    if (localStorage.hasOwnProperty('cart')) {
-      this.productsInCartArray = JSON.parse(localStorage.getItem('cart'));
-      for (const element of JSON.parse(localStorage.getItem('cart'))) {
-        this.productsInCart += element.quantity;
-      }
-    }
     this.productsService.getProductsInCartArrayListener().subscribe(
       products => {
         this.productsInCartArray = products;
