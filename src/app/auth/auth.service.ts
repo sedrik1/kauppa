@@ -1,8 +1,7 @@
-import { Injectable, inject, Inject } from '@angular/core';
-import { Subject, Observable, Subscription } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Subject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { ProductsService } from '../products/products.service';
 import { Product } from '../products/product.model';
 
 @Injectable({
@@ -23,8 +22,7 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private router: Router,
-    private prodcutsService: ProductsService
+    private router: Router
   ) { }
 
   getUserEmail(): string {
@@ -86,7 +84,7 @@ export class AuthService {
         const expirationDate = new Date(
           currentTime.getTime() + expiresInDuration * 2000
         );
-        this.saveAuthData(token, expirationDate, this.currentUserId, this.currentUser, this.cart);
+        this.saveAuthData(token, expirationDate, this.currentUserId, this.currentUser);
         this.isAuthenticatedListener.next(false);
       }
     }, error => {
@@ -123,7 +121,7 @@ export class AuthService {
         const expirationDate = new Date(
           currentTime.getTime() + expiresInDuration * 2000
         );
-        this.saveAuthData(token, expirationDate, this.currentUserId, this.currentUser, this.cart);
+        this.saveAuthData(token, expirationDate, this.currentUserId, this.currentUser);
         this.router.navigate(['/']);
       }
     }, error => {
@@ -194,7 +192,6 @@ export class AuthService {
         this.token = authInformation.token;
         this.currentUserId = authInformation.userId;
         this.currentUser = authInformation.userEmail;
-        // this.cart = authInformation.cart;
         this.setAuthTimer(expiresIn / 2000);
         this.currentUserListener.next(authInformation.userEmail);
         if (
@@ -214,12 +211,11 @@ export class AuthService {
     }
   }
 
-  private saveAuthData(token: string, expiration: Date, userId: string, userEmail: string, cart: Product[]) {
+  private saveAuthData(token: string, expiration: Date, userId: string, userEmail: string) {
     localStorage.setItem('token', token);
     localStorage.setItem('userId', userId);
     localStorage.setItem('userEmail', userEmail);
     localStorage.setItem('expiration', expiration.toISOString());
-    localStorage.setItem('cart', JSON.stringify(cart));
   }
 
   private getAuthData() {
@@ -227,12 +223,11 @@ export class AuthService {
     const userId = localStorage.getItem('userId');
     const userEmail = localStorage.getItem('userEmail');
     const expiration = localStorage.getItem('expiration');
-    const cart = localStorage.getItem('cart');
     if (!token || !expiration) {
       return;
     }
     return {
-      token, expiration: new Date(expiration), userId, userEmail, cart
+      token, expiration: new Date(expiration), userId, userEmail
     };
   }
 
@@ -247,6 +242,5 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('expiration');
     localStorage.removeItem('userEmail');
-    localStorage.removeItem('cart');
   }
 }

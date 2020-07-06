@@ -1,4 +1,4 @@
-<ul class="outerShell" *ngIf="itemsInCartArray.length > 0">
+<ul class="outerShell" *ngIf="productsInCartArray.length > 0">
   <div class="checkout" *ngIf="cartTotal !== 0">
     <p>Tuotteiden kokonaissumma: {{cartTotal | currency: ' '}}€</p>
     <!-- <p>Alennus: -{{cartTotal % 20 | currency: ' '}}€</p> -->
@@ -6,7 +6,7 @@
     <p>Tilauksen kokonaissumma: {{cartTotal + 4.99 | currency: ' '}}€</p>
     <button (click)="onPlaceAnOrder()" mat-raised-button color="accent">JATKA KASSALLE</button>
   </div>
-  <div class="innerShell" *ngFor="let item of itemsInCartArray">
+  <div class="innerShell" *ngFor="let item of productsInCartArray">
     <div>
       <div>
         <a routerLink="/product/{{item._id}}">
@@ -30,7 +30,7 @@
     <hr>
   </div>
 </ul>
-<div *ngIf="itemsInCartArray.length === 0">
+<div *ngIf="productsInCartArray.length === 0">
   <mat-card>
     <mat-card-content>
       <p>Et ole vielä lisännyt tuotteita.</p>

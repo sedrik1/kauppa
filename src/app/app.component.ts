@@ -20,10 +20,13 @@ export class AppComponent implements OnInit {
     }
     this.authService.getCurrentUserListener().subscribe();
     this.productsService.getProductsDB();
-    console.log(localStorage.hasOwnProperty('cart'));
-    console.log(localStorage.getItem('cart'));
+    if (localStorage.hasOwnProperty('cart')) {
+      console.log(localStorage.getItem('cart'));
+    }
     if (JSON.stringify(new Date()) > localStorage.getItem('timer')) {
       localStorage.removeItem('timer');
+      localStorage.removeItem('orderProducts');
+      localStorage.removeItem('orderDone');
     }
   }
 }

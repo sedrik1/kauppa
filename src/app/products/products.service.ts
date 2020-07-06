@@ -194,7 +194,7 @@ export class ProductsService {
     { orderProducts, customerId })
     .subscribe(message => {
       if (message.message === 'Tilaus käsitelty') {
-        // localStorage.setItem('cart', undefined);
+        localStorage.removeItem('cart');
         localStorage.setItem('orderDone', 'done');
         localStorage.setItem('orderProducts', JSON.stringify(orderProducts));
         console.log(message.message);
@@ -265,7 +265,6 @@ export class ProductsService {
       this.productsInCart = cartLength;
       this.productsInCartListener.next(this.productsInCart);
     }
-    localStorage.setItem('cart', JSON.stringify(this.productsInCartArray));
     cartLength = 0;
   }
 
@@ -282,7 +281,6 @@ export class ProductsService {
     } else {
       this.productsInCartListener.next(this.productsInCart);
     }
-    localStorage.setItem('cart', JSON.stringify(this.productsInCartArray));
   }
 
   changeItemQuantityInCart(quantity: number, product: Product): void {
@@ -303,9 +301,26 @@ export class ProductsService {
     }
     this.productsInCart = cartLength;
     this.productsInCartListener.next(this.productsInCart);
-    localStorage.setItem('cart', JSON.stringify(this.productsInCartArray));
     cartLength = 0;
   }
+
+/*   private updateLocalStorageCart(productsInCart: any, quantity?: number, product?: Product) {
+    const updateLocalStorageCart = JSON.parse(localStorage.getItem('cart'));
+    const presentProduct = this.findPresentProductIndex(updateLocalStorageCart);
+    if (presentProduct.quantity < quantity) {
+      presentProduct.quantity++;
+    } else {
+      presentProduct.quantity--;
+    }
+    for (let element of updateLocalStorageCart) {
+      for (const innerElement of productsInCart) {
+        if (element._id !== innerElement._id) {
+          element.push(innerElement);
+        }
+      }
+    }
+    localStorage.setItem('cart', JSON.stringify(updateLocalStorageCart));
+  } */
 
   private findPresentProductIndex(product): any {
     return this.productsInCartArray.find(

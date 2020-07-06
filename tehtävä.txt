@@ -3,9 +3,8 @@ salasanan palautuslomake
   -salasanan palautuslinkki
 
 tilauksen jälkeinen tarkastelusivu
-  -tilauksen id
-  -tilatut tuotteet
-  -auth guard
+  -tilatut tuotteet ✓
+  -auth guard ~✓
 
 sisällön lataamisen aikana esiin tulevat latausanimaatiot
 

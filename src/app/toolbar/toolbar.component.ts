@@ -32,14 +32,22 @@ export class ToolbarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log('ngOnInit toolbar');
     this.isLoading = true;
     this.isAuth = this.authService.getIsAuth();
     this.currentUser = this.authService.getUserEmail();
     this.productsInCart = this.productsService.getProductsInCart();
     this.productsInCartArray = this.productsService.getProductsInCartArray();
+    if (localStorage.hasOwnProperty('cart')) {
+      this.productsInCartArray = JSON.parse(localStorage.getItem('cart'));
+      for (const element of JSON.parse(localStorage.getItem('cart'))) {
+        this.productsInCart += element.quantity;
+      }
+    }
     this.productsService.getProductsInCartArrayListener().subscribe(
       products => {
         this.productsInCartArray = products;
+        localStorage.setItem('cart', JSON.stringify(this.productsInCartArray));
       }
     );
     this.productsService.getProductsInCartListener().subscribe(
@@ -92,15 +100,18 @@ export class ToolbarComponent implements OnInit {
     localStorage.removeItem('cart');
   }
 
+  setCart() {
+    localStorage.setItem('cart', 'testi');
+  }
+
   checkCart() {
-/*     if (
-      localStorage.hasOwnProperty('cart') &&
-      localStorage.getItem('cart').valueOf() !== 'undefined' ||
-      localStorage.getItem('cart').valueOf() !== 'null'
-    ) {
-      console.log('if');
-      console.log(localStorage.getItem('cart'));
-    } */
+    console.log(localStorage.hasOwnProperty('cart'));
+    console.log(localStorage.getItem('cart'));
+  }
+
+  checkProductsInCart() {
+    console.log(this.productsInCartArray);
+    console.log(this.productsInCart);
   }
 
   getIT() {

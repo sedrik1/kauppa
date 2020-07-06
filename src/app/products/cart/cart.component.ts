@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 export class CartComponent implements OnInit {
 
   cartTotal = 0;
-  itemsInCartArray = [];
+  productsInCartArray = [];
 
   constructor(
     private productsService: ProductsService,
@@ -20,10 +20,16 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.cartTotal = this.productsService.getProductsInCartTotal();
-    this.itemsInCartArray = this.productsService.getProductsInCartArray();
+    this.productsInCartArray = this.productsService.getProductsInCartArray();
+    if (localStorage.hasOwnProperty('cart')) {
+      this.productsInCartArray = JSON.parse(localStorage.getItem('cart'));
+      for (const element of JSON.parse(localStorage.getItem('cart'))) {
+        this.cartTotal += element.price * element.quantity;
+      }
+    }
     this.productsService.getProductsInCartArrayListener().subscribe(
       items => {
-        this.itemsInCartArray = items;
+        this.productsInCartArray = items;
       }
     );
     this.productsService.getProductsInCartTotalListener().subscribe(
@@ -43,6 +49,6 @@ export class CartComponent implements OnInit {
   }
 
   onPlaceAnOrder() {
-    this.productsService.placeAnOrder(this.itemsInCartArray, this.authService.getUserId());
+    this.productsService.placeAnOrder(this.productsInCartArray, this.authService.getUserId());
   }
 }
