@@ -9,8 +9,8 @@ tilauksen jälkeinen tarkastelusivu
 sisällön lataamisen aikana esiin tulevat latausanimaatiot
 
 jwt:t ei-kirjautuneelle vierailijalle ✓
-ostoskorin tallennus jwt:hen
-jwt:n korvaaminen jos vierailija kirjautuu sisään
+ostoskorin tallennus jwt:hen ✓ (localStorage)
+jwt:n korvaaminen jos vierailija kirjautuu sisään ✓
 
 parempi ulkoasu
   -tuotteille ✓

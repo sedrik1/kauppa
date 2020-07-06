@@ -89,43 +89,4 @@ export class ToolbarComponent implements OnInit {
     this.authService.logout();
   }
 
-  clearCart() {
-    localStorage.removeItem('cart');
-  }
-
-  setCart() {
-    localStorage.setItem('cart', 'testi');
-  }
-
-  checkCart() {
-    console.log(localStorage.hasOwnProperty('cart'));
-    console.log(localStorage.getItem('cart'));
-  }
-
-  checkProductsInCart() {
-    console.log(this.productsInCartArray);
-    console.log(this.productsInCart);
-  }
-
-  getIT() {
-    let testi = this.productsInCartArray;
-    let a = this.productsInCartArray;
-    testi.toString();
-    console.log('eka', testi);
-    console.log('lel', testi.toString());
-    JSON.stringify(a);
-    console.log('toka', a);
-
-    //JSON.parse(testi);
-    if (this.authService.checkForExcistingToken === undefined) {
-      this.authService.guestToken();
-    } else {
-      console.log(this.authService.getUserId());
-      console.log(this.authService.getUserEmail());
-    }
-  }
-  checkit() {
-      this.authService.clearAuthData();
-  }
-
 }

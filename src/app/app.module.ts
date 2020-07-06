@@ -19,6 +19,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { LayoutModule } from '@angular/cdk/layout';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -72,6 +73,7 @@ import { SearchedComponent } from './products/searched/searched.component';
     MatSelectModule,
     MatGridListModule,
     MatCheckboxModule,
+    MatTooltipModule,
     MatSidenavModule,
     MatProgressSpinnerModule,
     LayoutModule,

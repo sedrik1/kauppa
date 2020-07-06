@@ -47,4 +47,9 @@ export class ProfilePageComponent implements OnInit {
     form.resetForm();
   }
 
+  onCopyOrderId() {
+    const id = document.getElementById('orderId').innerHTML;
+    console.log(id.valueOf());
+  }
+
 }

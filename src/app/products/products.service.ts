@@ -222,25 +222,6 @@ export class ProductsService {
     );
   }
 
-/*   updateCartWithInternalStorageData(data: Product[]) {
-    let cartLength = 0;
-    let price = 0;
-    this.productsInCartArray.push(data);
-    this.productsInCartArrayListener.next([...this.productsInCartArray]);
-    for (const element of data) {
-      cartLength += element.quantity;
-    }
-    this.productsInCart = cartLength;
-    this.productsInCartListener.next(this.productsInCart);
-    for (const element of data) {
-      price = element.price;
-    }
-    this.productsInCartTotalPrice = price;
-    this.productsInCartTotalPriceListener.next(this.productsInCartTotalPrice);
-    cartLength = 0;
-    price = 0;
-  } */
-
   addProductToCart(product): void {
     let cartLength = 0;
     const presentProduct = this.findPresentProductIndex(product);
@@ -303,24 +284,6 @@ export class ProductsService {
     this.productsInCartListener.next(this.productsInCart);
     cartLength = 0;
   }
-
-/*   private updateLocalStorageCart(productsInCart: any, quantity?: number, product?: Product) {
-    const updateLocalStorageCart = JSON.parse(localStorage.getItem('cart'));
-    const presentProduct = this.findPresentProductIndex(updateLocalStorageCart);
-    if (presentProduct.quantity < quantity) {
-      presentProduct.quantity++;
-    } else {
-      presentProduct.quantity--;
-    }
-    for (let element of updateLocalStorageCart) {
-      for (const innerElement of productsInCart) {
-        if (element._id !== innerElement._id) {
-          element.push(innerElement);
-        }
-      }
-    }
-    localStorage.setItem('cart', JSON.stringify(updateLocalStorageCart));
-  } */
 
   private findPresentProductIndex(product): any {
     return this.productsInCartArray.find(

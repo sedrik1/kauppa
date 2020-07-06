@@ -19,8 +19,16 @@
                 {{order.orderDate | date}}
               </mat-panel-description>
             </mat-expansion-panel-header>
-              <span>Tilaustunnus: {{order._id}}</span> &nbsp;
-              <span title="Kopioi tunnus" style="cursor: pointer;" class="material-icons">&#xe14d;</span>
+              <span>Tilaustunnus: </span>
+              <span #orderId id="orderId">{{order._id}}</span> &nbsp;
+                <button
+                  (click)="onCopyOrderId()"
+                  matTooltip="Kopioi tilaustunnus"
+                  mat-flat-button>
+                  <i class="material-icons">
+                    content_copy
+                  </i>
+                </button>
               <hr>
               <p>Tilauksen kokonaishinta: {{order.totalPrice + order.deliveryFee | currency: ' '}}€</p>
               <p>Toimituskulut: {{order.deliveryFee | currency: ' '}}€</p>
