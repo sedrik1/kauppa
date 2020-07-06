@@ -88,33 +88,19 @@ export class ToolbarComponent implements OnInit {
     this.authService.logout();
   }
 
-/*     if (localStorage.hasOwnProperty('cart')) {
-      this.productsService.updateCartWithInternalStorageData(this.productsInCartArray);
-    } */
-
   clearCart() {
     localStorage.removeItem('cart');
   }
 
   checkCart() {
-    if (
-      !localStorage.hasOwnProperty('cart')
-      //localStorage.getItem('cart').valueOf() !== 'undefined' &&
-      //localStorage.getItem('cart').valueOf() !== 'null' &&
-      //localStorage.getItem('cart').trim() !== ''
+/*     if (
+      localStorage.hasOwnProperty('cart') &&
+      localStorage.getItem('cart').valueOf() !== 'undefined' ||
+      localStorage.getItem('cart').valueOf() !== 'null'
     ) {
       console.log('if');
-      localStorage.setItem('cart', JSON.stringify(this.productsInCartArray));
       console.log(localStorage.getItem('cart'));
-      let testi = localStorage.getItem('cart')
-      localStorage.setItem('cart', JSON.parse(testi));
-      console.log(localStorage.getItem('cart'));
-    } else {
-      console.log('else');
-      console.log(localStorage.getItem('cart'));
-      // localStorage.getItem('cart');
-      console.log(JSON.parse(localStorage.getItem('cart')));
-    }
+    } */
   }
 
   getIT() {

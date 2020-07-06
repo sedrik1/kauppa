@@ -21,8 +21,10 @@ export class AppComponent implements OnInit {
     this.authService.getCurrentUserListener().subscribe();
     this.productsService.getProductsDB();
     console.log(localStorage.hasOwnProperty('cart'));
-    if (localStorage.getItem('cart').valueOf() !== 'undefined') {
-      console.log(localStorage.getItem('cart'));
-    }
+    console.log(localStorage.getItem('cart'));
+
+/*     if (localStorage.hasOwnProperty('orderDone')) {
+      localStorage.removeItem('orderDone');
+    } */
   }
 }

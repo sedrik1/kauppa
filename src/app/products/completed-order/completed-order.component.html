@@ -2,6 +2,16 @@
   <mat-card>
     <div style="text-align: center;">
       <h2>Tilaus on vastaanotettu ja se on käsittelyssä</h2>
+      <p>Tilauksen kokonaishinta: {{totalPrice + 4.99 | currency: ' '}}€</p>
+      <p>Toimituskulut: {{4.99 | currency: ' '}}€</p>
+      <div class="ordered-products" *ngFor="let product of orderedProducts">
+        <li>Nimi: {{product.name}}</li>
+        <li>Tuotteen yksittäishinta: {{product.price | currency: ' '}}€</li>
+        <li>Tuotteen väri: {{product.colours}}</li>
+        <li>Tuotteen koko: {{product.sizes}}</li>
+        <li>Tuotteen määrä: {{product.quantity}}</li>
+      </div>
+      <br>
       <a mat-raised-button color="primary" routerLink="/">TAKAISIN ETUSIVULLE</a>
     </div>
   </mat-card>

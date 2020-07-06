@@ -194,7 +194,9 @@ export class ProductsService {
     { orderProducts, customerId })
     .subscribe(message => {
       if (message.message === 'Tilaus käsitelty') {
-        localStorage.setItem('cart', undefined);
+        // localStorage.setItem('cart', undefined);
+        localStorage.setItem('orderDone', 'done');
+        localStorage.setItem('orderProducts', JSON.stringify(orderProducts));
         console.log(message.message);
         this.getProductsDB();
         this.productsInCart = 0;
@@ -220,7 +222,7 @@ export class ProductsService {
     );
   }
 
-  updateCartWithInternalStorageData(data: Product[]) {
+/*   updateCartWithInternalStorageData(data: Product[]) {
     let cartLength = 0;
     let price = 0;
     this.productsInCartArray.push(data);
@@ -237,7 +239,7 @@ export class ProductsService {
     this.productsInCartTotalPriceListener.next(this.productsInCartTotalPrice);
     cartLength = 0;
     price = 0;
-  }
+  } */
 
   addProductToCart(product): void {
     let cartLength = 0;
@@ -265,19 +267,6 @@ export class ProductsService {
     }
     localStorage.setItem('cart', JSON.stringify(this.productsInCartArray));
     cartLength = 0;
-/*     if (
-      !localStorage.hasOwnProperty('cart') &&
-      localStorage.getItem('cart').valueOf() !== 'undefined' ||
-      localStorage.getItem('cart').valueOf() !== 'null'
-    ) {
-      console.log('if');
-      localStorage.setItem('cart', JSON.stringify(this.productsInCartArray));
-      console.log(localStorage.getItem('cart'));
-    } else {
-      console.log('else');
-      console.log(localStorage.getItem('cart'));
-      console.log(JSON.parse(localStorage.getItem('cart')));
-    } */
   }
 
   deleteItemFromCart(product): void {

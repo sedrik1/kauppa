@@ -3,10 +3,30 @@ main {
   margin: 10px auto auto auto;
 }
 
+.ordered-products {
+  padding: 3px;
+  border-top: 1px dashed white;
+  border-bottom: 1px dashed white;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ordered-products li {
+  list-style-type: none;
+  flex: 1;
+  padding: 3px;
+  margin: 3px;
+}
+
 @media only screen and (max-width: 609px) {
   mat-card {
     width: 250px;
     margin: 5px auto 5px auto;
+  }
+
+  li {
+    flex-direction: column;
+    float: left;
   }
 
   main {
