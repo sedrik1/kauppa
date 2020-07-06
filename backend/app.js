@@ -10,7 +10,7 @@ const app = express();
 
 mongoose
   .connect(
-    'mongodb+srv://ivan:kUn7qndQdJx5VLwd@cluster0-fpifk.mongodb.net/kauppa?retryWrites=true',
+    'mongodb+srv://username:password@cluster0-fpifk.mongodb.net/database?retryWrites=true',
     { useNewUrlParser: true }
   )
   .then(() => {
