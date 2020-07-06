@@ -22,9 +22,8 @@ export class AppComponent implements OnInit {
     this.productsService.getProductsDB();
     console.log(localStorage.hasOwnProperty('cart'));
     console.log(localStorage.getItem('cart'));
-
-/*     if (localStorage.hasOwnProperty('orderDone')) {
-      localStorage.removeItem('orderDone');
-    } */
+    if (JSON.stringify(new Date()) > localStorage.getItem('timer')) {
+      localStorage.removeItem('timer');
+    }
   }
 }

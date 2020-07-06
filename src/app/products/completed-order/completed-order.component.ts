@@ -23,6 +23,9 @@ export class CompletedOrderComponent implements OnInit {
         this.totalPrice += ordProd.price * ordProd.quantity;
       }
     }
+    const orderInspectionExpiration = new Date();
+    orderInspectionExpiration.setMinutes( orderInspectionExpiration.getMinutes() + 5);
+    localStorage.setItem('timer', JSON.stringify(orderInspectionExpiration));
   }
 
 }
