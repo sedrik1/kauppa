@@ -4,11 +4,11 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Installing and setting up
 
-Run `npm install` to install the necessary files for the app to work. This app uses a MongoDB database via cloud, so you will need to set up an account and a whitelisted IP address on https://www.mongodb.com/. Replace the three following words inside the angle brackets with your corresponding ones. The line of code is located in backend/app.js.
+Run `npm install` to install the necessary files for the app to work. This app uses a MongoDB database via cloud, so you will need to set up an account and a whitelisted IP address on https://www.mongodb.com/. Replace the three following words inside the grave accents with your corresponding ones. The line of code is located in backend/app.js.
 
 mongoose
   .connect(
-    'mongodb+srv://<username>:<password>@cluster0-fpifk.mongodb.net/<database>?retryWrites=true',
+    'mongodb+srv://`username`:`password`@cluster0-fpifk.mongodb.net/`database`?retryWrites=true',
     { useNewUrlParser: true }
   )
 
