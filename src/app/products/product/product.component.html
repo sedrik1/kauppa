@@ -1,0 +1,35 @@
+<main>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{product.brand}}</mat-card-title>
+      <mat-card-subtitle>{{product.name}} - {{product.quantity}}</mat-card-subtitle>
+    </mat-card-header>
+    <img src='https://via.placeholder.com/180' alt='Kuva tuotteesta'>
+    <mat-card-content>
+      {{product.price | currency: ' '}}€
+    </mat-card-content>
+    <mat-card-actions>
+      <form (submit)="onAddToCart(addToCartForm, product)" #addToCartForm="ngForm">
+        <mat-form-field>
+          <mat-label>Valitse koko</mat-label>
+          <mat-select ngModel name="size" #sizeSelect="ngModel" required>
+            <mat-option *ngFor="let size of product.sizes" [value]="size">
+              {{size | uppercase}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field>
+          <mat-label>Valitse väri</mat-label>
+          <mat-select ngModel name="colour" #colourSelect="ngModel" required>
+              <mat-option *ngFor="let colour of product.colours" [value]="colour">
+                {{colour | uppercase}}
+              </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br>
+        <button type="submit" color="primary" mat-raised-button>LISÄÄ OSTOSKORIIN</button>
+      </form>
+    </mat-card-actions>
+  </mat-card>
+</main>

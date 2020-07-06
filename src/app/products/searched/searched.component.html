@@ -1,0 +1,22 @@
+<h2 style="margin-left: 1rem;">Haulla '{{query}}' löytyi:</h2>
+<div *ngIf="productsSearched.length > 0; else noHits" class="cards">
+  <div *ngFor="let product of productsSearched" class="card">
+    <div class="product-image">
+      <a routerLink="/product/{{product._id}}">
+        <img
+        src="https://via.placeholder.com/230"
+        alt="Kuva tuotteesta">
+      </a>
+    </div>
+    <div class="product-info">
+      <h4>Hinta: {{product.price | currency: ' '}}€</h4>
+      <h4>{{product.name}}</h4>
+      <h4>{{product.brand | uppercase}}</h4>
+    </div>
+  </div>
+</div>
+<div class="cards">
+  <ng-template #noHits>
+    <h3 style="margin-left: 1rem;">Ei mitään :(</h3>
+  </ng-template>
+</div>

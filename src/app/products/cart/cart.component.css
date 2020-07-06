@@ -1,0 +1,32 @@
+mat-card {
+  width: 420px;
+  margin: 10px auto auto auto;
+}
+
+.outerShell {
+  width: 60%;
+  margin: 10px auto 10px auto;
+}
+
+span {
+  margin: auto 8px auto 8px;
+}
+
+.checkout {
+  margin: 10px;
+  padding: 10px;
+  float: right;
+  background-color: #424242;
+}
+
+.innerShell {
+  margin: 4px;
+}
+
+.checkoutInner {
+  margin: 5px;
+  padding: 1px;
+  float: center;
+  top: 0;
+}
+

@@ -1,0 +1,20 @@
+<mat-card>
+  <form (submit)="onCreateUser(signupForm)" #signupForm="ngForm">
+    <mat-form-field>
+      <input type="email" ngModel matInput name="email" #emailInput="ngModel" placeholder="Sähköpostiosoite" required email>
+      <mat-error *ngIf="emailInput.invalid">Syötä kelvollinen sähköpostiosoite</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input type="password" ngModel matInput name="pwd" #pwdInput="ngModel" placeholder="Salasana" required>
+      <mat-error *ngIf="pwdInput.invalid"></mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input type="password" ngModel matInput name="confirmPwd" #confirmPwdInput="ngModel" placeholder="Kirjoita salasana uudestaan" required>
+      <mat-error *ngIf="confirmPwdInput.invalid"></mat-error>
+    </mat-form-field>
+    <br>
+    <button mat-raised-button color="primary" type="submit">LUO TILI</button>
+  </form>
+</mat-card>

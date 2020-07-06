@@ -1,0 +1,87 @@
+
+<div class="flex-container">
+  <form (submit)="onSearchForProducts(searchForm)" #searchForm="ngForm">
+    <mat-form-field>
+      <input ngModel matInput name="products" #productsInput="ngModel" placeholder="Etsi tuotteita" type="text" >
+    </mat-form-field>
+  </form>
+
+  <mat-form-field>
+    <mat-label>Suodata tuotteita</mat-label>
+    <mat-select #t (selectionChange)="onFilterProducts(t.value)">
+      <mat-option disabled selected value="Suodata tuotteita">Suodata tuotteita</mat-option>
+      <mat-option value="tops">Yläosat</mat-option>
+      <mat-option value="bottoms">Alaosat</mat-option>
+      <mat-option value="apparel">Asusteet</mat-option>
+      <mat-option value="all">Kaikki tuotteet</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</div>
+  <div class="cards" *ngIf="showTops">
+    <div *ngFor="let product of productsTops" class="card">
+      <div class="product-image">
+        <a routerLink="/product/{{product._id}}">
+          <img
+          src="https://via.placeholder.com/230"
+          alt="Kuva tuotteesta">
+        </a>
+      </div>
+      <div class="product-info">
+        <h4>Hinta: {{product.price | currency: ' '}}€</h4>
+        <h4>{{product.name}}</h4>
+        <h4>{{product.brand | uppercase}}</h4>
+      </div>
+    </div>
+  </div>
+
+<div class="cards" *ngIf="showBottoms">
+  <div *ngFor="let product of productsBottoms" class="card">
+    <div class="product-image">
+      <a routerLink="/product/{{product._id}}">
+        <img
+        src="https://via.placeholder.com/230"
+        alt="Kuva tuotteesta">
+      </a>
+    </div>
+    <div class="product-info">
+      <h4>Hinta: {{product.price | currency: ' '}}€</h4>
+      <h4>{{product.name}}</h4>
+      <h4>{{product.brand | uppercase}}</h4>
+    </div>
+  </div>
+</div>
+
+<div class="cards" *ngIf="showApparel">
+  <div *ngFor="let product of productsApparel" class="card">
+    <div class="product-image">
+      <a routerLink="/product/{{product._id}}">
+        <img
+        src="https://via.placeholder.com/230"
+        alt="Kuva tuotteesta">
+      </a>
+    </div>
+    <div class="product-info">
+      <h4>Hinta: {{product.price | currency: ' '}}€</h4>
+      <h4>{{product.name}}</h4>
+      <h4>{{product.brand | uppercase}}</h4>
+    </div>
+  </div>
+</div>
+
+  <div class="cards" *ngIf="showAll">
+    <div *ngFor="let product of products" class="card">
+      <div class="product-image">
+        <a routerLink="/product/{{product._id}}">
+          <img
+          src="https://via.placeholder.com/230"
+          alt="Kuva tuotteesta">
+        </a>
+      </div>
+      <div class="product-info">
+        <h4>Hinta: {{product.price | currency: ' '}}€</h4>
+        <h4>{{product.name}}</h4>
+        <h4>{{product.brand | uppercase}}</h4>
+      </div>
+    </div>
+  </div>

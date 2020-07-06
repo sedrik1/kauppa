@@ -1,0 +1,73 @@
+<mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav mode="over" [(opened)]="opened">
+      <nav class="product-filter">
+        <div class="collection-sort">
+          <a color="primary" mat-raised-button routerLink="/"><span>ETUSIVU</span></a>
+          <a color="primary" mat-raised-button routerLink="/login" *ngIf="!isAuth"><span>KIRJAUDU SISÄÄN</span></a>
+          <a color="primary" mat-raised-button routerLink="/profile" *ngIf="isAuth"><span>{{ currentUser | uppercase }}</span></a>
+          <a (click)="onLogout()" color="primary" mat-raised-button *ngIf="isAuth"><span>KIRJAUDU ULOS</span></a>
+          <a color="primary" mat-raised-button routerLink="/signup" *ngIf="!isAuth"><span>LUO TILI</span></a>
+          <a routerLink="/cart" color="primary" mat-raised-button>OSTOSKORI</a>
+        </div>
+      </nav>
+    </mat-sidenav>
+  <mat-sidenav-content *ngIf="isLoading" >
+    <mat-toolbar *ngIf="!switchToolbar"
+      color="accent">
+      <a color="primary" mat-raised-button routerLink="/">ETUSIVU</a>
+      <a color="primary" mat-raised-button routerLink="/login" *ngIf="!isAuth">KIRJAUDU SISÄÄN</a>
+      <a color="primary" mat-raised-button routerLink="/profile" *ngIf="isAuth">{{ currentUser | uppercase }}</a>
+      <a (click)="onLogout()" color="primary" mat-raised-button *ngIf="isAuth">KIRJAUDU ULOS</a>
+      <a color="primary" mat-raised-button routerLink="/signup" *ngIf="!isAuth">LUO TILI</a>
+      <span class="fill-remaining-space"></span>
+      <a
+        routerLink="/cart"
+        color="primary"
+        mat-raised-button>OSTOSKORI</a>
+    </mat-toolbar>
+    <br>
+    <button (click)="getIT()">GET</button>
+    <button (click)="checkit()">check</button>
+    <button (click)="checkCart()">CHECK</button>
+    <button (click)="clearCart()">CLEAR</button>
+
+    <button mat-raised-button color="primary" *ngIf="switchToolbar" (click)="sidenav.toggle()">&#9776;</button>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<mat-spinner *ngIf="!isLoading"></mat-spinner>
+
+<div
+  class="cart-inner"
+  *ngIf="!displayCartInner">
+  <div *ngIf="productsInCartArray.length > 0">
+    <div class="cartItem" *ngFor="let product of productsInCartArray">
+      <a routerLink="/product/{{product._id}}">
+        <img
+        src="https://via.placeholder.com/80"
+        alt="Kuva tuotteesta">
+      </a>
+      <p style="color: aliceblue;">
+        <span>Hinta: {{product.price | currency: ' '}}€</span>
+        <br>
+        <span>{{product.brand}} - {{product.name}} - {{product.colours[0]}}</span>
+        <br>
+        <span>Koko: {{product.sizes}}</span>
+        <br>
+        <span>Määrä: {{product.quantity}}</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<button
+  [matBadge]='productsInCart'
+  matBadgeOverlap="true"
+  matBadgeColor="primary"
+  (click)="onExpandCart()"
+  mat-fab
+  color="primary"
+  class="cart">
+  <i class="material-icons">&#xe547;</i>
+</button>

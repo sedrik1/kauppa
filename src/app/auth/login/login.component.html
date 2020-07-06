@@ -1,0 +1,17 @@
+<mat-card>
+  <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
+    <mat-form-field>
+      <input type="email" ngModel matInput name="email" #emailInput="ngModel" placeholder="Sähköpostiosoite" required email>
+      <mat-error *ngIf="emailInput.invalid">Syötä kelvollinen sähköpostiosoite</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input type="password" ngModel matInput name="pwd" #pwdInput="ngModel" placeholder="Salasana" required>
+      <mat-error *ngIf="pwdInput.invalid"></mat-error>
+    </mat-form-field>
+    <br>
+    <button mat-raised-button color="primary" type="submit">KIRJAUDU SISÄÄN</button>
+  </form>
+  <br>
+  <a routerLink="/forgot" mat-raised-button color="accent" type="button">UNOHDITKO SALASANASI?</a>
+</mat-card>

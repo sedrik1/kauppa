@@ -1,0 +1,26 @@
+salasanan palautuslomake
+  -sähköposti
+  -salasanan palautuslinkki
+
+tilauksen jälkeinen tarkastelusivu
+  -tilauksen id
+  -tilatut tuotteet
+  -auth guard
+
+sisällön lataamisen aikana esiin tulevat latausanimaatiot
+
+jwt:t ei-kirjautuneelle vierailijalle ✓
+ostoskorin tallennus jwt:hen
+jwt:n korvaaminen jos vierailija kirjautuu sisään
+
+parempi ulkoasu
+  -tuotteille ✓
+  -etsinnälle ✓
+  -mobiili 557px ✓
+
+käyttäjän syötteen tarkastus
+  -rekisteröityminen ✓
+  -kirjautuminen ✓
+  -uusi salasana profiilissa ✓ ja palautuslomakkeessa
+  -uusi sähköposti ✓
+  -haku ✓

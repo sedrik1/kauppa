@@ -1,0 +1,73 @@
+<main>
+
+  <h2>Hei, {{currentUser | uppercase}}</h2>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Tilauksesi
+        </mat-panel-title>
+        <mat-panel-description>
+          Tarkastele tilauksiasi
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+        <p *ngIf="currentUserOrders.length === 0">Ei tilauksia</p>
+        <mat-accordion multi *ngFor="let order of currentUserOrders">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-description>
+                {{order.orderDate | date}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+              <span>Tilaustunnus: {{order._id}}</span> &nbsp;
+              <span title="Kopioi tunnus" style="cursor: pointer;" class="material-icons">&#xe14d;</span>
+              <hr>
+              <p>Tilauksen kokonaishinta: {{order.totalPrice + order.deliveryFee | currency: ' '}}€</p>
+              <p>Toimituskulut: {{order.deliveryFee | currency: ' '}}€</p>
+              <ul *ngFor="let product of order.products">
+                <a class="productLink" routerLink="/product/{{product._id}}"><li>{{product.name}}</li></a>
+                <li>Yksittäishinta: {{product.price | currency: ' '}}€ <br> Tuotteiden kokonaishinta: {{product.price * product.quantity | currency: ' '}}€</li>
+                <li>Koko: {{product.sizes}}</li>
+                <li>Väri: {{product.colours | uppercase}}</li>
+                <li>Määrä: {{product.quantity}}</li>
+              </ul>
+          </mat-expansion-panel>
+        </mat-accordion>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Asetukset
+        </mat-panel-title>
+        <mat-panel-description>
+          Hallitse tilisi asetuksia
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <h4>Sähköpostiosoitteesi: <p>{{currentUser}}</p></h4>
+
+      <form (submit)="onChangeEmail(newEmailForm)" #newEmailForm='ngForm'>
+        <mat-form-field>
+          <input placeholder="Uusi sähköpostiosoite" type="email" matInput ngModel name="newEmail" #newEmailInput="ngModel" required email>
+        </mat-form-field>
+        <br>
+        <button mat-raised-button color="primary" type="submit">Vaihda sähköpostiosoite</button>
+      </form>
+
+      <hr>
+
+      <h4>Salasanasi: <p>*********</p></h4>
+      <form (submit)="onChangePwd(passwordForm)" #passwordForm="ngForm">
+        <mat-form-field>
+          <mat-label>Vaihda salasanasi</mat-label>
+          <input placeholder="Uusi salasana" type="password" ngModel matInput name="pwd" required>
+        </mat-form-field>
+        <br>
+        <button type="submit" mat-raised-button color="primary">Vaihda salasana</button>
+      </form>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+
+</main>
