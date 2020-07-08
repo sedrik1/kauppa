@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Product } from '../products/product.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -165,19 +166,22 @@ export class AuthService {
   changePassword(email: string, newPassword: string): void {
     this.http.put<{message: string}>
     ('http://localhost:3000/api/user/changeUserPassword',
-    { email, newPassword })
-    .subscribe(asd => {
-      console.log(asd.message);
-    });
+    { email, newPassword });
   }
 
   changeUserEmail(newEmail: string, oldEmail: string) {
-    this.http.put<{message: string, updatedEmail: string}>
-    ('http://localhost:3000/api/user/changeUserEmail',
-    { newEmail, oldEmail })
-    .subscribe((res) => {
-      this.currentUser = res.updatedEmail;
-      this.currentUserListener.next(this.currentUser);
+    let resMesg;
+    this.http.put<{errors?, message?: string, updatedEmail?: string}>(
+      'http://localhost:3000/api/user/changeUserEmail',
+      { newEmail, oldEmail }
+    ).subscribe(res => {
+      if (res.message === 'Sähköposti vaihdettu') {
+        this.currentUser = res.updatedEmail;
+        this.currentUserListener.next(this.currentUser);
+        localStorage.setItem('userEmail', this.currentUser);
+      }
+      resMesg = res.message;
+      return resMesg;
     });
   }
 

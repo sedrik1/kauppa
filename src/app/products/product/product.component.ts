@@ -3,6 +3,7 @@ import { ProductsService } from '../products.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Product } from '../product.model';
 import { NgForm } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product',
@@ -19,7 +20,8 @@ export class ProductComponent implements OnInit {
 
   constructor(
     private productsService: ProductsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -72,6 +74,9 @@ export class ProductComponent implements OnInit {
       maxQuantity: product.quantity
     };
     this.productsService.addProductToCart(prod);
+    this.snackBar.open('Tuote lisätty', 'Sulje', {
+      duration: 2000,
+    });
     form.resetForm();
   }
 

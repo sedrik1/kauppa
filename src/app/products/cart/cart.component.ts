@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../products.service';
 import { Product } from '../product.model';
 import { AuthService } from 'src/app/auth/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-cart',
@@ -15,7 +16,8 @@ export class CartComponent implements OnInit {
 
   constructor(
     private productsService: ProductsService,
-    private authService: AuthService
+    private authService: AuthService,
+    public snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -38,8 +40,11 @@ export class CartComponent implements OnInit {
     this.productsService.changeItemQuantityInCart(event.target.value, item);
   }
 
-  onDeleteFromCart(item): void {
-    this.productsService.deleteItemFromCart(item);
+  onDeleteFromCart(product): void {
+    this.productsService.deleteItemFromCart(product);
+    this.snackBar.open(`${product.name} poistettu ostoskorista`, 'Sulje', {
+      duration: 2000,
+    });
   }
 
   onPlaceAnOrder() {

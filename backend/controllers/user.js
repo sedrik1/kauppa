@@ -20,23 +20,24 @@ exports.changeUserEmail = (req, res, next) => {
     User.findOne({ email: req.body.newEmail })
     .then(user => {
       if(!user) {
-        User.findOneAndUpdate(
+        User.updateOne(
           { email: req.body.oldEmail },
           { $set: { email: req.body.newEmail } }
         )
         .then(() => {
-          return res.status(201).json({ message: 'Onnistui', updatedEmail: req.body.newEmail });
-        })
-        .catch(err => {
-          console.log(err);
+          return res.status(200).json({
+          message: 'Sähköposti vaihdettu',
+          updatedEmail: req.body.newEmail
+        });
         });
       } else {
-        return res.status(204).json({ message: 'Sähköposti jo käytössä' });
+        return res.status(200).json({
+          message: 'Sähköposti käytössä',
+          updatedEmail: req.body.oldEmail
+        });
       }
     })
-    .catch(err => {
-      console.log(err);
-    });
+    .catch(err => { return res.status(201).json({ message: 'virhe' }); });
   }
 };
 
@@ -97,23 +98,19 @@ exports.loginUser = (req, res, next) => {
   const errors = validationResult(req);
   let fetchedUser;
   if(!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.array() });
+    return res.status(200).json({ errors: errors.array() });
   } else {
     User.findOne({ email: req.body.email })
     .then(user => {
       if(!user) {
-        return res.status(204).json({
-          message: 'Tarkasta syötetty sähköposti ja salasana'
-        });
+        return res.status(200).json({ message: 'Tarkasta syötetty sähköposti ja salasana' });
       }
       fetchedUser = user;
       return bcrypt.compare(req.body.pwd, user.password);
     })
     .then(result => {
       if(!result) {
-        return res.status(204).json({
-          message: 'Tarkasta syötetty sähköposti ja salasana'
-        });
+        return res.status(201).json({ message: 'Tarkasta syötetty sähköposti ja salasana' });
       }
       const token = jwt.sign(
         { email: fetchedUser.email, userId: fetchedUser.userId },
@@ -129,7 +126,7 @@ exports.loginUser = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err);
+      return res.status(200).json({ message: 'Tapahtui virhe' });
     });
   }
 };

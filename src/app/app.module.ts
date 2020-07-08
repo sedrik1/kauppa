@@ -40,7 +40,7 @@ import { ForgotComponent } from './auth/forgot/forgot.component';
 import { CompletedOrderComponent } from './products/completed-order/completed-order.component';
 import { SearchedComponent } from './products/searched/searched.component';
 import { ErrorComponent } from './error/error.component';
-import { ErrorInterceptor } from './message-interceptor';
+import { ErrorInterceptor } from './error-interceptor';
 
 @NgModule({
   declarations: [

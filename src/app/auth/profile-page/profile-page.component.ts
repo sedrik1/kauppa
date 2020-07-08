@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { NgForm } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductsService } from 'src/app/products/products.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class ProfilePageComponent implements OnInit {
   currentUserOrders: any[];
   constructor(
     private authService: AuthService,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    public snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -36,6 +38,9 @@ export class ProfilePageComponent implements OnInit {
       return;
     }
     this.authService.changeUserEmail(form.value.newEmail, this.currentUser);
+    this.snackBar.open('vaihdettu', 'Sulje', {
+      duration: 2000,
+    });
     form.resetForm();
   }
 
@@ -44,11 +49,15 @@ export class ProfilePageComponent implements OnInit {
       return;
     }
     this.authService.changePassword(this.currentUser, form.value.pwd);
+
     form.resetForm();
   }
 
   onCopyOrderId() {
     const id = document.getElementById('orderId').innerHTML;
+    this.snackBar.open('Tilaustunnus kopioitu leikepöydälle', 'Sulje', {
+      duration: 2000,
+    });
     console.log(id.valueOf());
   }
 }
