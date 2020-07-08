@@ -3,9 +3,32 @@ mat-card {
   margin: 10px auto auto auto;
 }
 
-.outerShell {
-  width: 60%;
-  margin: 10px auto 10px auto;
+body {
+  margin: 5px;
+}
+
+.outer-shell {
+  margin: auto;
+  width: 75%;
+}
+
+.inner-shell {
+  display: flex;
+}
+
+.product-data {
+  float: left;
+  margin: 15px;
+}
+
+.info {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.pic {
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 span {
@@ -13,20 +36,33 @@ span {
 }
 
 .checkout {
-  margin: 10px;
   padding: 10px;
   float: right;
   background-color: #424242;
 }
 
-.innerShell {
-  margin: 4px;
-}
+@media only screen and (max-width: 1035px) {
+  .outer-shell {
+    display: grid;
+  }
 
-.checkoutInner {
-  margin: 5px;
-  padding: 1px;
-  float: center;
-  top: 0;
-}
+  .product-data {
+    margin: 5px;
+  }
 
+  .info {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .pic {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .checkout {
+    padding: 10px;
+    margin: 3px;
+    background-color: #424242;
+  }
+}

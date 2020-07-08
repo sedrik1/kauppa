@@ -51,5 +51,4 @@ export class ProfilePageComponent implements OnInit {
     const id = document.getElementById('orderId').innerHTML;
     console.log(id.valueOf());
   }
-
 }

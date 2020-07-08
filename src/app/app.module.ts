@@ -20,6 +20,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 import { LayoutModule } from '@angular/cdk/layout';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -37,6 +39,8 @@ import { ProductComponent } from './products/product/product.component';
 import { ForgotComponent } from './auth/forgot/forgot.component';
 import { CompletedOrderComponent } from './products/completed-order/completed-order.component';
 import { SearchedComponent } from './products/searched/searched.component';
+import { ErrorComponent } from './error/error.component';
+import { ErrorInterceptor } from './message-interceptor';
 
 @NgModule({
   declarations: [
@@ -51,7 +55,8 @@ import { SearchedComponent } from './products/searched/searched.component';
     ProductComponent,
     ForgotComponent,
     CompletedOrderComponent,
-    SearchedComponent
+    SearchedComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -75,13 +80,17 @@ import { SearchedComponent } from './products/searched/searched.component';
     MatCheckboxModule,
     MatTooltipModule,
     MatSidenavModule,
+    MatDialogModule,
     MatProgressSpinnerModule,
     LayoutModule,
+    MatSnackBarModule,
     RouterModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ErrorComponent]
 })
 export class AppModule { }
