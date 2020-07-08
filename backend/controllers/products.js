@@ -55,7 +55,7 @@ exports.getProducts = (req, res, next) => {
       apparel: apparel
     });
   }).catch(err => {
-    return res.status(500).json({ message: 'Jokin meni pieleen '});
+    return res.status(200).json({ message: 'Jokin meni pieleen '});
   });
 };
 
@@ -65,10 +65,10 @@ exports.getProduct = (req, res, next) => {
     if(product) {
       return res.status(200).json(product);
     } else {
-      return res.status(401).json({message: 'Tuotetta ei ole'});
+      return res.status(200).json({message: 'Tuotetta ei ole'});
     }
   })
   .catch(err => {
-    res.status(500).json({message: 'Jokin meni pieleen'});
+    res.status(200).json({message: 'Jokin meni pieleen'});
   });
 };

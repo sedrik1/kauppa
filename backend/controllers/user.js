@@ -3,15 +3,6 @@ const { validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-exports.testi = (req, res, next) => {
-  const errors = validationResult(req);
-  if(!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.array() });
-  } else {
-    return res.status(200).json({ message: 'OK' });
-  }
-};
-
 exports.changeUserEmail = (req, res, next) => {
   const errors = validationResult(req);
   if(!errors.isEmpty()) {
@@ -110,14 +101,14 @@ exports.loginUser = (req, res, next) => {
     })
     .then(result => {
       if(!result) {
-        return res.status(201).json({ message: 'Tarkasta syötetty sähköposti ja salasana' });
+        return res.status(200).json({ message: 'Tarkasta syötetty sähköposti ja salasana' });
       }
       const token = jwt.sign(
         { email: fetchedUser.email, userId: fetchedUser.userId },
         'secret_key_for_development_purposes_only',
         { expiresIn: '2h' }
       );
-      res.status(200).json({
+      res.status(201).json({
         email: fetchedUser.email,
         authLevel: fetchedUser.authLevel,
         userId: fetchedUser._id,
@@ -141,7 +132,7 @@ exports.tokenForGuest = (req, res, next) => {
     { expiresIn: '2h' }
   );
 
-  res.status(200).json({
+  res.status(201).json({
     authLevel: 'guest',
     guestId: _id,
     token: token,

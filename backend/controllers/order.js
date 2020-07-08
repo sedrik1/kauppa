@@ -57,24 +57,21 @@ exports.placeAnOrder = (req, res, next) => {
           } else {
             return false;
           }
-          console.log('täällä', finalised);
           return finalised;
         })
         .catch(err => {
-          console.log(err);
-          return false;
+          return res.status(200).json({ message: 'Tapahtui virhe' });
         });
       }
     })
     .then((finalised) => {
-      console.log('alku', finalised);
       for(const element of req.body.orderProducts) {
         Product.findByIdAndUpdate(
           { _id: element._id },
           { quantity: element.maxQuantity - element.quantity },
           (err, result) => {
             if (err) {
-              console.log(err);
+              return res.status(200).json({ message: 'Tapahtui virhe' });
             } else {
               updatedProductQuantityCount++;
               if(req.body.orderProducts.length === updatedProductQuantityCount) {
@@ -90,8 +87,7 @@ exports.placeAnOrder = (req, res, next) => {
       console.log('loppu', finalised);
     })
     .catch(err => {
-      console.log(err);
-      return false;
+      return res.status(200).json({ message: 'Tapahtui virhe' });
     });
   }());
 
@@ -101,14 +97,13 @@ exports.getOrders = (req, res, next) => {
   Order.find( { customerId: req.body.customerId } )
   .then(orders => {
     if(!orders) {
-      return res.status(204).json({ message: 'Ei tilauksia' });
+      return res.status(200).json({ message: 'Ei tilauksia' });
     } else {
-      return res.status(201).json({ orders: orders });
+      return res.status(200).json({ orders: orders });
     }
   })
   .catch(err => {
-    console.log(err);
-    return false;
+    return res.status(200).json({ message: 'Tapahtui virhe' });
   });
 };
 

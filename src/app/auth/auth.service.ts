@@ -3,7 +3,6 @@ import { Subject, Observable, Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Product } from '../products/product.model';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -241,7 +240,7 @@ export class AuthService {
     }, duration * 2000);
   }
 
-  clearAuthData() {
+  private clearAuthData() {
     localStorage.removeItem('userId');
     localStorage.removeItem('token');
     localStorage.removeItem('expiration');
